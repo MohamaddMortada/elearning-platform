@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CourseList from "./components/CourseList";
 import Home from "./components/Home";
+import AssignmentList from "./components/AssignmentList";
+
 
 const App = () => {
     return (
@@ -22,6 +24,10 @@ const App = () => {
                     <Route
                         path="/courses"
                         element={<CourseList />}
+                    />
+                    <Route 
+                        path="/courses/:courseId/assignments" 
+                        element={<AssignmentList/>} 
                     />
                 </Routes>
             </div>
