@@ -5,7 +5,7 @@ const AssignmentList = ({ courseId }) => {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        fetch(`http://localhost/elearning/servers/getAssignments.php?course_id=${courseId}`)
+        fetch(`http://localhost/elearning/servers/getAssignments.php?course_id=${courseId}`,{method:'POST'})
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === "success") {
@@ -29,7 +29,7 @@ const AssignmentList = ({ courseId }) => {
                     <li key={assignment.id}>
                         <strong>{assignment.title}</strong> - Due: {assignment.due_date}
                         <p>{assignment.description}</p>
-                        <AssignmentSubmissionForm assignmentId={assignment.id} />
+                        
                     </li>
                 ))}
             </ul>
