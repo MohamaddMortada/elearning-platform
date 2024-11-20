@@ -6,8 +6,18 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include "connection.php";
 
+$data = json_decode(file_get_contents("php://input"), true);
+
+if (!isset($data['course_id'])) {
+    echo json_encode(["status" => "error", "message" => "Course ID is required"]);
+    exit();
+}
+
+$course_id = $data['course_id'];
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $course_id = $_POST['course_id'] ?? null;
+
 
     if ($course_id) {
         $sql = "SELECT * FROM assignments WHERE course_id = ?";

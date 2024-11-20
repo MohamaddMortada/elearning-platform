@@ -22,6 +22,7 @@ const CourseList = () => {
     }, []);
 
     const enrollInCourse = (courseId) => {
+        localStorage.setItem("courseId", courseId);
         fetch("http://localhost/elearning-platform/servers/enroll.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
