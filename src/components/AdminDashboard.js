@@ -57,7 +57,7 @@ const AdminDashboard = () => {
                 <ul>
                     {courses.map((course) => (
                         <li key={course.id}>
-                            {course.title} - Instructor: {course.instructor_name}
+                            {course.title} - Instructor: {course.instructor_id}
                         </li>
                     ))}
                 </ul>

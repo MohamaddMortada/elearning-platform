@@ -7,6 +7,7 @@ import CommentForm from "./components/comments";
 import PostForm from "./components/announcements";
 import InvitationForm from "./components/InvitationForm";
 import AdminDashboard from "./components/AdminDashboard";
+import AdminCrud from "./components/AdminCrud";
 
 
 const App = () => {
@@ -34,7 +35,8 @@ const App = () => {
                 <CommentForm/>
                 <PostForm/>
                 <InvitationForm/>
-                <AdminDashboard/>
+                
+                <AdminCrud/>
             </div>
         </Router>
     );
