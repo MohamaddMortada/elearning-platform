@@ -10,6 +10,36 @@ const PostForm = ({ courseId, instructorId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const endpoint =
+            type === "announcement"
+                ? "http://localhost/elearning-platform/servers/postAnnouncement.php"
+                : "http://localhost/elearning-platform/servers/postAssignment.php";
+
+        const body = {
+            course_id: courseId,
+            instructor_id: instructorId,
+            title,
+            content: type === "announcement" ? content : undefined,
+            description: type === "assignment" ? content : undefined,
+            due_date: type === "assignment" ? dueDate : undefined,
+        };
+
+        fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setMessage(data.message);
+                if (data.status === "success") {
+                    setTitle("");
+                    setContent("");
+                    setDueDate("");
+                }
+            })
+            .catch(() => setMessage("Failed to post"));
+
     };
 
     return (
