@@ -27,7 +27,7 @@ if($course_id){
 }
 }*/
 
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $sql = "SELECT * FROM assignments WHERE course_id=5";
         $stmt = $conn->prepare($sql);
 
@@ -43,5 +43,5 @@ $sql = "SELECT * FROM assignments WHERE course_id=5";
         } else {
             echo json_encode(["status" => "success", "assignments" => []]);
         }
-
+    } echo json_encode(["status"=>"error"]);
 ?>

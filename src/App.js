@@ -1,48 +1,16 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import CourseList from "./components/CourseList";
-import Home from "./components/Home";
-import AssignmentList from "./components/AssignmentList";
-import CommentForm from "./components/comments";
-import PostForm from "./components/announcements";
-import InvitationForm from "./components/InvitationForm";
-import AdminDashboard from "./components/AdminDashboard";
-import AdminCrud from "./components/AdminCrud";
+import React, { useState } from "react";
+import AppRoutes from "./routes/AppRoutes";
+import Header from "./components/Header";
 
+function App() {
+  const [userType, setUserType] = useState("admin"); 
 
-const App = () => {
-    return (
-        <Router>
-            <div>
-                <nav>
-                    <Link to="/">Home</Link>
-                    <Link to="/courses">Courses</Link>
-                </nav>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={<Home />}
-                    />
-                    <Route
-                        path="/courses"
-                        element={<CourseList />}
-                    />
-                    <Route 
-                        path="/courses/:courseId/assignments" 
-                        element={<AssignmentList/>} 
-                    />
-                </Routes>
-                <CommentForm/>
-                <PostForm/>
-                <InvitationForm/>
-                
-                <AdminCrud/>
-            </div>
-        </Router>
-    );
-};
-
-
-
+  return (
+    <div>
+      <Header userType={userType} />
+      <AppRoutes />
+    </div>
+  );
+}
 
 export default App;

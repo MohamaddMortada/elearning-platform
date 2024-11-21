@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import AssignmentSubmissionForm from "./AssignmentSubmission";
+import AssignmentSubmissionForm from "../Student/AssignmentSubmission";
 
 const AssignmentList = ({ courseId }) => {
     console.log(courseId);

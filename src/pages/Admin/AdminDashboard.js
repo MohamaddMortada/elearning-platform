@@ -37,9 +37,7 @@ const AdminDashboard = () => {
             }),
           });
     
-          if (response.ok) {
-            fetchUsers();
-          } else {
+          if (!response.ok) {
             console.error("Failed to update user status");
           }
         } catch (error) {
