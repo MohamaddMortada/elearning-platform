@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CommentForm = ({ courseId, userId }) => {
+const CommentForm = () => {
     const [commentText, setCommentText] = useState("");
     const [commentType, setCommentType] = useState("public"); 
     const [message, setMessage] = useState("");
@@ -29,12 +29,32 @@ const CommentForm = ({ courseId, userId }) => {
         }
 
         const commentData = {
-            course_id: storedCourseId,
-            user_id: userId,
+            course_id: 1,
+            student_id: 1,
             comment: commentText,
             visibility: commentType, 
         };
-        console.log(commentData.course_id);
+
+        fetch("http://localhost/elearning-platform/servers/postComment.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(commentData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.status === "success") {
+                    setMessage("Comment posted successfully!");
+                    setCommentText(""); 
+                } else {
+                    setMessage(data.message || "Failed to post comment.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error posting comment:", error);
+                setMessage("Failed to post comment.");
+            });
     };
 
     return (
