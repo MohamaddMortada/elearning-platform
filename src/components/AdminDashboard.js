@@ -7,7 +7,7 @@ const AdminDashboard = () => {
     const [error, setError] = useState("");
 
     const fetchData = (endpoint, setState) => {
-        fetch(`http://localhost/elearning-platform/servers/${endpoint}`)
+        fetch(`http://localhost/elearning-platform/servers/${endpoint}`,{method:'POST'})
             .then((res) => res.json())
             .then((data) => {
                 if (data.status === "success") {
