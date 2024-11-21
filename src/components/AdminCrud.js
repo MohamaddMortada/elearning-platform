@@ -99,11 +99,14 @@ const AdminCrud = () => {
       console.error("Error deleting course:", error);
     }
   };
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
+
+
 
   return (
     <div>

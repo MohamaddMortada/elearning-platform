@@ -25,6 +25,29 @@ const AdminDashboard = () => {
         fetchData("getAllCourses.php", setCourses);
     }, []);
 
+    const handleBanToggle = async (userId, role, isBanned) => {
+        try {
+          const response = await fetch('http://localhost/elearning-platform/servers/banUser.php', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: userId,
+              role,
+              ban: !isBanned,
+            }),
+          });
+    
+          if (response.ok) {
+            fetchUsers();
+          } else {
+            console.error("Failed to update user status");
+          }
+        } catch (error) {
+          console.error("Error updating user status:", error);
+        }
+      };
+    
+
     return (
         <div>
             <h1>Admin Dashboard</h1>
@@ -36,6 +59,10 @@ const AdminDashboard = () => {
                     {students.map((student) => (
                         <li key={student.id}>
                             {student.name} - {student.email}
+                                <strong>Status:</strong> {student.banned ? "Banned" : "Active"}
+                                <button
+                                onClick={() => handleBanToggle(student.id, 'student', student.banned)}>{student.banned ? "Unban" : "Ban"}
+                                </button>
                         </li>
                     ))}
                 </ul>
@@ -47,6 +74,10 @@ const AdminDashboard = () => {
                     {instructors.map((instructor) => (
                         <li key={instructor.id}>
                             {instructor.name} - {instructor.email}
+                            <strong>Status:</strong> {instructor.banned ? "Banned" : "Active"}
+                                <button
+                                onClick={() => handleBanToggle(instructor.id, 'instructor', instructor.banned)}>{instructor.banned ? "Unban" : "Ban"}
+                                </button>
                         </li>
                     ))}
                 </ul>
