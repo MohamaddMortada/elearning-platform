@@ -18,12 +18,12 @@ $instructor_id = $input['instructor_id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $sql = "INSERT INTO courses (id,title, description, instructor_id) VALUES (?, ?, ?, ?)";
+    $sql = "UPDATE courses SET title = ?, description = ?, instructor_id = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssi', $title,$description,$instructor_id);
+    $stmt->bind_param('ssii', $title,$description,$instructor_id,$id);
     $stmt->execute();
 
-    echo json_encode(["status" => "success", "message" => "Course created successfully."]);
+    echo json_encode(["status" => "success", "message" => "Course edited successfully."]);
 }else{
     echo json_encode(["status" => "error", "message" => "Invalid request method"]);
 }
