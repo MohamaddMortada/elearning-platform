@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { signup } from "../auth.js";
+import { signup } from "./auth.js";
 
 const SignUp = () => {
   const [name, setname] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student");
 
   const handleSignup = async (e) => {
     e.preventDefault();

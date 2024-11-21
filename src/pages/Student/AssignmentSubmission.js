@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+const token = localStorage.getItem("token");
 const AssignmentSubmissionForm = ({ assignmentId }) => {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState("");
@@ -23,6 +23,7 @@ const AssignmentSubmissionForm = ({ assignmentId }) => {
 
         fetch("http://localhost/elearning/submitAssignment.php", {
             method: "POST",
+            headers:{"Authorization": `${token}`,},
             body: formData,
         })
             .then((response) => response.json())

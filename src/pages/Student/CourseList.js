@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-
+const token = localStorage.getItem("token");
 const CourseList = () => {
     const [courses, setCourses] = useState([]);
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost/elearning-platform/servers/getCourse.php",{method:"POST",})
+        fetch("http://localhost/elearning-platform/servers/getCourse.php",{
+            method:"POST",
+            headers: {
+                "Authorization": `${token}`,
+              },
+        })
             .then((response) => response.json())
             .then((data) => {
                 console.log("Response Data:", data);

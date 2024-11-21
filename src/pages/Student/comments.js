@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+const token = localStorage.getItem("token");
 const CommentForm = () => {
     const [commentText, setCommentText] = useState("");
     const [commentType, setCommentType] = useState("public"); 
@@ -39,6 +39,7 @@ const CommentForm = () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `${token}`,
             },
             body: JSON.stringify(commentData),
         })

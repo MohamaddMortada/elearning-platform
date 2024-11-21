@@ -7,6 +7,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 include "connection.php";
+require 'auth.php';
+$user = authenticate();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
@@ -22,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':comment', $comment);
     $stmt->bindParam(':visibility', $visibility);
     
-    if ($stmt->execute()) {
+    if ($stmt->execute(['user_id' => $user->user_id])) {
         echo json_encode(["status" => "success", "message" => "Comment posted successfully."]);
     } else {
         echo json_encode(["status" => "error", "message" => "Failed to post comment."]);
