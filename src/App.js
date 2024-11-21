@@ -4,6 +4,7 @@ import CourseList from "./components/CourseList";
 import Home from "./components/Home";
 import AssignmentList from "./components/AssignmentList";
 import CommentForm from "./components/comments";
+import PostForm from "./components/announcements";
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
                     />
                 </Routes>
                 <CommentForm/>
+                <PostForm/>
             </div>
         </Router>
     );
