@@ -4,6 +4,26 @@ const AdminDashboard = () => {
     const [students, setStudents] = useState([]);
     const [instructors, setInstructors] = useState([]);
     const [courses, setCourses] = useState([]);
+    const [error, setError] = useState("");
+
+    const fetchData = (endpoint, setState) => {
+        fetch(`http://localhost/elearning-platform/servers/${endpoint}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.status === "success") {
+                    setState(data[endpoint.split('getAll')[1].toLowerCase()]);
+                } else {
+                    setError(data.message);
+                }
+            })
+            .catch((err) => setError("Failed to load data"));
+    };
+
+    useEffect(() => {
+        fetchData("getAllStudents.php", setStudents);
+        fetchData("getAllInstructors.php", setInstructors);
+        fetchData("getAllCourses.php", setCourses);
+    }, []);
 
     return (
         <div>
